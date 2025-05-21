@@ -13,17 +13,12 @@ const { Server } = require("socket.io");//Socket.ioライブラリからServer�
 
 // 本番環境の場合のみ、静的ファイルを提供
 if (process.env.NODE_ENV === "production") {
-	// 静的ファイル提供
 	app.use(express.static(path.join(__dirname, "../client/.next")));
-	app.use(express.static(path.join(__dirname, "../client/public")));
-
-	app.get("/.*/", (req, res) => {
-		res.sendFile(path.join(__dirname, "../client/.next/server/app/index.html"));
-	});
 }
 
 const io = new Server(server, {
 	cors: {
+		// 開発環境のみCORSを許可
 		origin: process.env.NODE_ENV === "production"
 			? false
 			: ["http://localhost:3000"]
