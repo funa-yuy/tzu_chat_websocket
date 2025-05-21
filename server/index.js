@@ -13,9 +13,9 @@ const { Server } = require("socket.io");//Socket.ioライブラリからServer�
 
 // 本番環境の場合のみ、静的ファイルを提供
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "../client/out")));
+	// 静的ファイル提供
+	app.use(express.static(path.join(__dirname, "../client/.next")));
 	app.use(express.static(path.join(__dirname, "../client/public")));
-	app.use("/_next", express.static(path.join(__dirname, "../client/.next")));
 
 	app.get("*", (req, res) => {
 		res.sendFile(path.join(__dirname, "../client/.next/server/app/index.html"));

@@ -5,8 +5,12 @@
 import { useState } from "react";
 import io from "socket.io-client";
 
-
-const socket = io("http://localhost:8000");
+// Socket.io接続
+const socket = io(
+	process.env.NODE_ENV === "production"
+		? window.location.origin
+		: "http://localhost:8000"
+);
 
 export default function Home() {
 	const [message, setMessage] = useState("");
