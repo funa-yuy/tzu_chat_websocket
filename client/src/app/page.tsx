@@ -5,12 +5,8 @@ import { handleClientScriptLoad } from "next/script";
 import { useState } from "react";
 import io from "socket.io-client";
 
-// Socket.io接続
-const socket = io(
-	process.env.NODE_ENV === "production"
-		? window.location.origin
-		: "http://localhost:8000"
-);
+
+const socket = io("http://localhost:8000");
 
 export default function Home() {
 	const [message, setMessage] = useState("");
