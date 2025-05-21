@@ -5,17 +5,27 @@ const express = require("express");
 const { SlowBuffer } = require("node:buffer");
 const { Socket } = require("node:dgram");
 const { createServer } = require("node:http");
+const path = require("path");
 
 const app = express();
 const server = createServer(app);
 const { Server } = require("socket.io");//Socket.ioライブラリからServerクラスを取り出す
+
+// 本番環境の場合のみ、静的ファイルを提供
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "../client/.next")));
+}
+
 const io = new Server(server, {
 	cors: {
-		origin: ["http://localhost:3000"]
+		// 開発環境のみCORSを許可
+		origin: process.env.NODE_ENV === "production"
+			? false
+			: ["http://localhost:3000"]
 	},
 });
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 //クライアントと通信 onメソッドは受け取るメソッド
 io.on("connection", (socket) => {

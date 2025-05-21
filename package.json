@@ -1,0 +1,21 @@
+{
+	"name": "tzu-chat-app",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"install:client": "cd client && npm install",
+		"install:server": "cd server && npm install",
+		"install:all": "npm run install:client && npm run install:server",
+		"build:client": "cd client && npm run build",
+		"start:server": "cd server && node index.js",
+		"dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run start\"",
+		"start": "npm run start:server",
+		"build": "npm run install:all && npm run build:client"
+	},
+	"dependencies": {
+		"concurrently": "^8.2.2"
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	}
+}
