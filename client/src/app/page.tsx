@@ -1,7 +1,7 @@
 'use client'
 
-import Image from "next/image";
-import { handleClientScriptLoad } from "next/script";
+// import Image from "next/image";
+// import { handleClientScriptLoad } from "next/script";
 import { useState } from "react";
 import io from "socket.io-client";
 
