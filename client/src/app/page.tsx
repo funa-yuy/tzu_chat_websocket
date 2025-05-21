@@ -10,7 +10,8 @@ const socket = io("http://localhost:8000");
 
 export default function Home() {
 	const [message, setMessage] = useState("");
-	const [list, setList] = useState([]);//過去のメッセージを保持しておくリスト。初めは空[]
+	type ChatMessage = { message: string; id: string };
+	const [list, setList] = useState<ChatMessage[]>([]);//過去のメッセージを保持しておくリスト。初めは空[]
 
 	const handleSendMessage = () => {
 		//サーバーへ送信
